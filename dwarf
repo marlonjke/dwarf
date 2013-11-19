@@ -1,22 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-#
-#    Dwarf: A PICKit 2 GUI for Linux
-#    Copyright (C) 2009  Nathan Dumont (hairymnstr@gmail.com)
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
-#
-#    You should have received a copy of the GNU General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
+
 
 import pygtk
 pygtk.require("2.0")
@@ -80,12 +64,12 @@ class MainWindow(gtk.Window):
     self.button_layout.pack_start(self.auto_btn)
 
     # Botão de conexão manual
-    #self.manual_pb = gtk.Image()
-    #self.manual_pb.set_from_file("data/manual.png")
-    #self.manual_btn = gtk.Button()
-    #self.manual_btn.set_image(self.manual_pb)
-    #self.manual_btn.connect("clicked", self.manual_cb)
-    #self.button_layout.pack_start(self.manual_btn)
+    self.manual_pb = gtk.Image()
+    self.manual_pb.set_from_file("data/manual.png")
+    self.manual_btn = gtk.Button()
+    self.manual_btn.set_image(self.manual_pb)
+    self.manual_btn.connect("clicked", self.manual_cb)
+    self.button_layout.pack_start(self.manual_btn)
         
     # Programa o microcontrolador
     self.program_pb = gtk.Image()
@@ -143,7 +127,7 @@ class MainWindow(gtk.Window):
     self.status_msg = ""    # the detailed message presented when details is
                             # clicked.
 
-    self.status_btn = gtk.Button("Details")
+    self.status_btn = gtk.Button("Detalhes")
     self.status_btn.set_size_request(50,-1)
     self.status_layout = gtk.HBox()
     self.status_layout.pack_start(self.status_bg)
