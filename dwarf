@@ -52,13 +52,13 @@ class MainWindow(gtk.Window):
     self.bar_layout = gtk.HBox()
     self.button_layout = gtk.HBox()
 
-    # build file selector
+    # adiciona um seletor de arquivo.
     self.open_btn = gtk.Button(None, gtk.STOCK_OPEN)
     self.open_btn.connect("clicked", self.open_cb)
     self.bar_layout.pack_start(self.open_btn)
     self.source_file = ""
 
-    # add a model selector
+    # adiciona um seletor de modelo de pic.
     self.model = gtk.Label()
     self.model_bg = gtk.Frame()
     self.model_bg_bg = gtk.EventBox()
@@ -71,7 +71,7 @@ class MainWindow(gtk.Window):
     self.bar_layout.pack_start(self.model_bg_bg)
 
     # assemble a set of image buttons
-    # Auto-detect PIC button
+    # Botão de auto-detecção de microcontrolador
     self.auto_pb = gtk.Image()
     self.auto_pb.set_from_file(os.path.join(APP_FOLDER, "data/auto.png"))
     self.auto_btn = gtk.Button()
@@ -79,7 +79,7 @@ class MainWindow(gtk.Window):
     self.auto_btn.connect("clicked", self.auto_cb)
     self.button_layout.pack_start(self.auto_btn)
 
-    # Manual connect button
+    # Botão de conexão manual
     #self.manual_pb = gtk.Image()
     #self.manual_pb.set_from_file("data/manual.png")
     #self.manual_btn = gtk.Button()
@@ -87,52 +87,56 @@ class MainWindow(gtk.Window):
     #self.manual_btn.connect("clicked", self.manual_cb)
     #self.button_layout.pack_start(self.manual_btn)
         
-    # program
+    # Programa o microcontrolador
     self.program_pb = gtk.Image()
     self.program_pb.set_from_file(os.path.join(APP_FOLDER, "data/program.png"))
     self.program_btn = gtk.Button()
     self.program_btn.set_image(self.program_pb)
     self.program_btn.connect("clicked", self.program_cb)
-    self.program_btn.set_sensitive(False)               # disable until connect
+    # desabilitado enquanto conectado...
+    self.program_btn.set_sensitive(False)               
     self.button_layout.pack_start(self.program_btn)
         
-    # Read
+    # Leitura da memória flash do microcontrolador
     self.read_pb = gtk.Image()
     self.read_pb.set_from_file(os.path.join(APP_FOLDER, "data/read.png"))
     self.read_btn = gtk.Button()
     self.read_btn.set_image(self.read_pb)
     self.read_btn.connect("clicked", self.read_cb)
-    self.read_btn.set_sensitive(False)                  # disable until connect
+    # desabilitado enquanto conectado...
+    self.read_btn.set_sensitive(False)                  
     self.button_layout.pack_start(self.read_btn)
       
-    # run
+    # Roda o programa no microcontrolador. Alimenta a placa de testes.
     self.run_pb = gtk.Image()
     self.run_pb.set_from_file(os.path.join(APP_FOLDER, "data/run.png"))
     self.run_btn = gtk.Button()
     self.run_btn.set_image(self.run_pb)
     self.run_btn.connect("clicked", self.run_cb)
-    self.run_btn.set_sensitive(False)                   # disable until connect
+    # desabilitado enquanto conectado...
+    self.run_btn.set_sensitive(False)                   
     self.button_layout.pack_start(self.run_btn)
 
-    # stop
+    # Para o programa no microcontrolador. Corta alimentação da placa de testes.
     self.stop_pb = gtk.Image()
     self.stop_pb.set_from_file(os.path.join(APP_FOLDER, "data/stop.png"))
     self.stop_btn = gtk.Button()
     self.stop_btn.set_image(self.stop_pb)
     self.stop_btn.connect("clicked", self.stop_cb)
-    self.stop_btn.set_sensitive(False)                  # disable until connect
+    # desabilitado enquanto conectado...
+    self.stop_btn.set_sensitive(False)                  
     self.button_layout.pack_start(self.stop_btn)
 
-    # exit
+    # Sai do programa
     self.exit_btn = gtk.Button(None, gtk.STOCK_QUIT)
     self.exit_btn.connect("clicked", self.destroy_cb)
     self.button_layout.pack_start(self.exit_btn)
 
-    # set the root layout
+    # laytout
     self.bar_layout.pack_end(self.button_layout, expand=False)
     self.layout.pack_start(self.bar_layout)
         
-    # add a status label
+    # Label de status
     self.status_label = gtk.Label("Status: OK")
     self.status_bg = gtk.EventBox()
     self.status_bg.add(self.status_label)
@@ -152,7 +156,7 @@ class MainWindow(gtk.Window):
     self.add(self.layout)
     self.show_all()
 
-    # make a list of colours for the status label
+    # Lista de cores para o label de status
     self.colours = {}
     self.colours["red"] = gtk.gdk.Color(65535,0,0)
     self.colours["green"] = gtk.gdk.Color(0,65535,0)
@@ -459,31 +463,30 @@ class PicKit:
 def usage():
   """ Usage information printed when help is requested or the command is
       wrongly used. """
-  print "dwarf [options] [filename]"
-  print ""
-  print "Starts the Dwarf GUI application.  The optional filename is a "
-  print "standard PIC hex file which will be loaded by the application "
-  print "ready for programming on startup."
-  print ""
-  print "Options"
-  print "  -v, --verbose   Prints commands sent to PK2CMD for debugging."
-  print "  -h, --help      Prints this help information."
-  print ""
-  print """    Copyright (C) 2010  Nathan Dumont (hairymnstr@gmail.com)
+  print """dwarf [options] [filename]
+  Starts the Dwarf GUI application.  The optional filename is a 
+  standard PIC hex file which will be loaded by the application 
+  ready for programming on startup.
+  
+  Options
+    -v, --verbose   Prints commands sent to PK2CMD for debugging.
+    -h, --help      Prints this help information.
+  
+  Copyright (C) 2010  Nathan Dumont (hairymnstr@gmail.com)
 
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>."""
-
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see <http://www.gnu.org/licenses/>."""
+  
   return
 
 if __name__ == "__main__":
@@ -506,6 +509,5 @@ if __name__ == "__main__":
   if len(args) == 1:
     main_win.set_file(args[0])
   elif len(args) > 1:
-    print "Warning, can only select one file, first argument taken."
-
+    print "Atenção, apenas um arquivo pode ser selecionado, o primeiro será utilizado"
   gtk.main()
